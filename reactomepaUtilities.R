@@ -1,4 +1,20 @@
 #hack reactomepa for arabidopsis
+library(igraph)
+library(reshape2)
+library(randomcoloR)
+
+clusterPathways <- function(g,thres){
+
+    g2<-delete.edges(g,E(g)[E(g)$weight<thres)
+    cf<-cluster_fast_greedy(g2)
+    n<-length(cf)
+    palette <- distinctColorPalette(n)
+    V(g2)$color<-palette(membership(g2)    
+    plot(g2,vertex.size=3,vertex.label=NA)
+    list(g2,cf)
+
+}
+
 constructPathwayNetwork <- function(x){
 
     geneSets <- x@geneSets
