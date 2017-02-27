@@ -36,6 +36,7 @@ constructPathwayNetwork <- function(x){
     wd <- wd[wd[,1] != wd[,2],]
     wd <- wd[!is.na(wd[,3]),]
     g <- graph.data.frame(wd[,-3], directed=F)
+    E(g)$weight<-wd[,3]
     g
 
 }
