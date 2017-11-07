@@ -5,11 +5,11 @@ library(randomcoloR)
 
 clusterPathways <- function(g,thres){
 
-    g2<-delete.edges(g,E(g)[E(g)$weight<thres)
+    g2<-delete.edges(g,E(g)[E(g)$weight<thres])
     cf<-cluster_fast_greedy(g2)
     n<-length(cf)
     palette <- distinctColorPalette(n)
-    V(g2)$color<-palette(membership(g2)    
+    V(g2)$color<-palette(membership(g2))    
     plot(g2,vertex.size=3,vertex.label=NA)
     list(g2,cf)
 
@@ -40,6 +40,13 @@ constructPathwayNetwork <- function(x){
     g
 
 }
+                         
+overlap_ratio <- function(x, y) {
+    x <- unlist(x)
+    y <- unlist(y)
+    length(intersect(x, y))/length(unique(c(x,y)))
+}
+
 
 myenrichPathway <- function(gene,
                           organism="arabidopsis",
